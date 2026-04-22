@@ -420,7 +420,7 @@ function App() {
                 <span className="edu-year-badge" style={{background:'rgba(0,148,198,0.1)', padding:'5px 10px', borderRadius:'10px', color:'var(--ocean-light)', fontSize:'0.8rem'}}>2021 - 2024</span>
                 <FaUniversity style={{fontSize:'2.5rem', color:'rgba(255,255,255,0.05)'}} />
               </div>
-              <h3 className="edu-title" style={{marginTop:'10px'}}>BSC (HONS) SOFTWARE ENGINEERING</h3>
+              <h3 className="edu-title" style={{marginTop:'10px'}}>BSC (HONS) SOFTWARE ENGINEERING xxxxx</h3>
               <p className="edu-place">University of Plymouth, UK</p>
               <p style={{color:'#8892b0', marginTop:'15px', fontSize:'0.9rem'}}>Specialized in full-stack development. Graduated with Second Class Honours.</p>
             </div>
