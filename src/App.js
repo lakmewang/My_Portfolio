@@ -213,12 +213,12 @@ function App() {
       
       {/* --- Responsive Header --- */}
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-        <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px', zIndex: 2000, position: 'relative' }}>
+        <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <img src="LG logo.png" alt="Lakmewan G Logo" style={{ height: '40px', width: 'auto' }} />
         </div>
 
         {/* Mobile Hamburger Button */}
-        <div className={`mobile-menu-icon ${isMobileMenuOpen ? 'open' : ''}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} style={{ zIndex: 3000, position: 'relative' }}>
+        <div className={`mobile-menu-icon ${isMobileMenuOpen ? 'open' : ''}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
         </div>
 
@@ -422,7 +422,7 @@ function App() {
               </div>
               <h3 className="edu-title" style={{marginTop:'10px'}}>BSC (HONS) SOFTWARE ENGINEERING</h3>
               <p className="edu-place">University of Plymouth, UK</p>
-              <p style={{color:'#8892b0', marginTop:'15px', fontSize:'0.9rem'}}>Specialized in full-stack development. Graduated with First Class Honours.</p>
+              <p style={{color:'#8892b0', marginTop:'15px', fontSize:'0.9rem'}}>Specialized in full-stack development. Graduated with Second Class Honours.</p>
             </div>
             <div className="edu-card">
                <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start'}}>
@@ -431,7 +431,7 @@ function App() {
               </div>
               <h3 className="edu-title" style={{marginTop:'10px'}}>G.C.E ADVANCED LEVEL</h3>
               <p className="edu-place">Maliyadeva Model College, Kurunegala</p>
-              <p style={{color:'#8892b0', marginTop:'15px', fontSize:'0.9rem'}}>Physical Science Stream. Achieved District Rank within top 100.</p>
+              <p style={{color:'#8892b0', marginTop:'15px', fontSize:'0.9rem'}}>Physical Science Stream.</p>
             </div>
           </div>
         </section>

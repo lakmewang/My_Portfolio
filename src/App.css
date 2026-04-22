@@ -23,11 +23,17 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
 
+/* FIX FOR iOS SAFARI HORIZONTAL SCROLL BUG */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
 body {
   background-color: var(--bg-dark);
   color: var(--text-main);
   font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(0, 148, 198, 0.12) 0%, transparent 30%),
     radial-gradient(circle at 90% 80%, rgba(76, 201, 240, 0.08) 0%, transparent 30%);
@@ -140,13 +146,14 @@ h1, h2, h3 { font-weight: 700; }
 }
 .nav-links a:hover { color: #fff; background: rgba(255, 255, 255, 0.05); transform: translateY(-2px); }
 
-/* Hide Mobile Menu Button on Desktop */
+/* Hide Mobile Menu Button and Mobile Code Box on Desktop */
 .mobile-menu-icon { display: none; }
+.mobile-menu-code-box { display: none; }
 
 /* --- HERO SECTION --- */
 .hero { 
-  width: 100vw; position: relative; left: 50%; right: 50%; 
-  margin-left: -50vw; margin-right: -50vw;
+  width: 100%; /* REMOVED iOS BUGGY 100vw */
+  position: relative; 
   display: flex; align-items: center; justify-content: center; 
   min-height: 100vh; gap: 50px; padding-top: 100px;
   background: linear-gradient(to right, rgba(0, 5, 16, 0.95), rgba(0, 5, 16, 0.8)),
@@ -168,7 +175,7 @@ h1, h2, h3 { font-weight: 700; }
 .btn { 
   padding: 15px 35px; border-radius: 50px; font-weight: 600; cursor: pointer; 
   text-decoration: none; display: inline-flex; align-items: center; justify-content: center; 
-  transition: 0.3s; white-space: nowrap; /* Prevents text from breaking into two lines */
+  transition: 0.3s; white-space: nowrap; 
 }
 .btn-group { display: flex; gap: 20px; flex-wrap: wrap; }
 .btn-outline { border: 2px solid var(--ocean-main); background: transparent; color: white; }
@@ -352,7 +359,7 @@ h1, h2, h3 { font-weight: 700; }
 @media (max-width: 768px) {
   
   .navbar {
-    top: 0; left: 0; width: 100vw; transform: none !important; padding: 15px 20px;
+    top: 0; left: 0; width: 100%; transform: none !important; padding: 15px 20px;
     border-radius: 0; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     display: flex; flex-direction: row; justify-content: space-between; align-items: center;
   }
@@ -364,19 +371,51 @@ h1, h2, h3 { font-weight: 700; }
     display: flex; font-size: 1.8rem; color: #fff; cursor: pointer; z-index: 3000; align-items: center; position: relative;
   }
   
+  /* OVERLAY MENU */
   .nav-links {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
     background-color: rgba(0, 5, 16, 0.98); backdrop-filter: blur(15px);
-    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 35px;
+    display: flex; flex-direction: column; justify-content: flex-start; align-items: center; 
+    padding-top: 80px; padding-bottom: 50px; gap: 20px;
+    overflow-y: auto;
     transform: translateX(100%); transition: transform 0.4s ease-in-out; z-index: 2000; margin: 0;
   }
   
   .nav-links.active { transform: translateX(0); }
-  .nav-links a { font-size: 1.5rem; }
+  .nav-links a { font-size: 1.2rem; }
+
+  /* MOBILE CODE BOX RENDERED IN NAV */
+  .mobile-menu-code-box {
+    display: flex !important; /* Force display */
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+    padding-bottom: 30px;
+  }
+  
+  .mobile-menu-code-box .code-window {
+    width: 90%;
+    max-width: 350px;
+    transform: none !important; /* Remove scaling to prevent clipping */
+    animation: none !important; /* Force removal of fade-in opacity bugs */
+    opacity: 1 !important;      /* Guarantee visibility */
+    visibility: visible !important;
+  }
+  
+  /* Scale down using native font size instead of CSS Transform */
+  .mobile-menu-code-box .code-content,
+  .mobile-menu-code-box .line-numbers {
+    font-size: 0.65rem; 
+    line-height: 1.4;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 
   .hero-text h1 { white-space: normal; font-size: clamp(2rem, 8vw, 3rem); }
   .hero-text h2 { font-size: clamp(1.2rem, 5vw, 2rem); }
-  .code-window.hide-on-mobile { display: none; }
+  
+  /* Hide hero code box so it doesn't double render */
+  .hide-on-mobile { display: none !important; }
 
   .timeline::before { left: 20px; }
   .timeline-item { width: 100%; padding-left: 60px; padding-right: 0; }
